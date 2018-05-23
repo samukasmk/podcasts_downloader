@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import os
 import scrapy
-
+from scrapy.loader import ItemLoader
+from podcasts_downloader.items import PodcastMP3Item
 
 class TalkpythonSpider(scrapy.Spider):
     name = 'talkpython'
@@ -17,7 +17,6 @@ class TalkpythonSpider(scrapy.Spider):
             yield scrapy.Request(episode_url, callback=self.parse_mp3_links)
 
     def parse_mp3_links(self, response):
-        podcast_href = response.xpath("//a[contains(@href,'.mp3')]/@href").extract_first()
-        if podcast_href:
-            podcast_url = response.urljoin(podcast_href)
-            yield {'file_urls': [podcast_url]}
+        url_loader = ItemLoader(item=PodcastMP3Item(), response=response)
+        url_loader.add_xpath('file_urls', '//a[contains(@href,".mp3")]/@href')
+        return url_loader.load_item()
