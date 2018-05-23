@@ -67,8 +67,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapy.pipelines.files.FilesPipeline': 1,
-    # 'podcasts_downloader.pipelines.PodcastsDownloaderPipeline': 300,
+    'podcasts_downloader.pipelines.DownloadMP3FilesPipeline': 1,
 }
 
 MEDIA_ALLOW_REDIRECTS = True
