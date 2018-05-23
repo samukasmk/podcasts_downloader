@@ -66,9 +66,12 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'podcasts_downloader.pipelines.PodcastsDownloaderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'scrapy.pipelines.files.FilesPipeline': 1,
+    # 'podcasts_downloader.pipelines.PodcastsDownloaderPipeline': 300,
+}
+
+MEDIA_ALLOW_REDIRECTS = True
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
